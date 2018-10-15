@@ -99,9 +99,8 @@ public class ReusableMethods extends SalesforceBaseClass{
 		 htmlReporter.config().setTestViewChartLocation(ChartLocation.TOP);
 		 htmlReporter.config().setTheme(Theme.STANDARD);
 	}
-	public static ExtentTest createTestScriptReport(String testScriptName){
+	public static void createTestScriptReport(String testScriptName){
 		logger = extent.createTest("Login_Error_Message_1");
-		return logger;
 	}
 	public static void endExtentReport(){
 		extent.flush();

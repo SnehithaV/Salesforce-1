@@ -16,7 +16,7 @@ import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 
 public class AutomationScript extends ReusableMethods {
-	@Test
+	
 	public static void Login_Error_Message_1() throws InterruptedException, IOException {
 		Properties pro=new Properties();
 		BufferedReader reader = new BufferedReader(new FileReader("./src/test/resources/DataFiles/Configuration.properties"));
@@ -39,7 +39,7 @@ public class AutomationScript extends ReusableMethods {
 		verifyText(actuaError, "error message",expData);
 		closeDriver();
 	}
-	@Test
+	
 	private static void Login_To_SalesForce_2() {
 		
 		
