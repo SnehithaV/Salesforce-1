@@ -13,7 +13,7 @@ public class DriverScriptTest extends AutomationScript{
 		String dt_Path = cur_dir+"\\src\\test\\resources\\Utility\\TestSuite.xls";
 		String testCase =null;
 		String flag = null;
-		
+		System.out.println("execution started from driverfile");
 		initializeExtentReport("salesforceTestscriptsReport");
 		String[][] TestSuitedata = readxlData(dt_Path,"Sheet1");
 		for(int i = 1; i< TestSuitedata.length; i++) {
