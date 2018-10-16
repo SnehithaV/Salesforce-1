@@ -6,36 +6,33 @@ import java.io.IOException;
 import java.util.Properties;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.Status;
-import com.aventstack.extentreports.markuputils.ExtentColor;
-import com.aventstack.extentreports.markuputils.MarkupHelper;
 
 public class AutomationScript extends ReusableMethods {
 	
-	public static void Login_Error_Message_1() throws InterruptedException, IOException {
-		Properties pro=new Properties();
-		BufferedReader reader = new BufferedReader(new FileReader("./src/test/resources/DataFiles/Configuration.properties"));
-		pro.load(reader);
+	public static void Login_Error_Message_1() throws Exception {
+		String propertyPath="./src/test/resources/DataFiles/Configuration.properties";
+		Properties pro=loadPropertyFile(propertyPath);
+		
+		String objectRepoPath="./src/test/resources/ObjectRepository/ObjectsRepo.properties";
+		Properties objPro=loadPropertyFile(objectRepoPath);
+		
 		createTestScriptReport("Login_Error_Message_1");
 		String expData="Please enter your password.";
 		IntializeDriver("firefox");
 		driver.get(pro.getProperty("salesforceUrl"));
 		logger.log(Status.INFO,"salesforce page opened");
-		WebElement username=driver.findElement(By.xpath("//input[@id='username']"));
+		WebElement username=driver.findElement(getLocator("salesforce.login.username",objPro));
 		enterText(username, "username field","User@gmail.com");
-		WebElement password=driver.findElement(By.xpath("//input[@id='password']"));
+		WebElement password=driver.findElement(getLocator("salesforce.login.password",objPro));
 		password.clear();
 		logger.log(Status.INFO,"password field cleared");
-		
-		WebElement loginButton=driver.findElement(By.id("Login"));
+		WebElement loginButton=driver.findElement(getLocator("salesforce.login.loginButton",objPro));
 		clickElement(loginButton, "Login Button");
 		logger.log(Status.INFO,"login button clicked");
-		WebElement actuaError=driver.findElement(By.xpath("//div[@id='error']"));
+		WebElement actuaError=driver.findElement(getLocator("salesforce.login.errorMsg",objPro));
 		verifyText(actuaError, "error message",expData);
 		closeDriver();
 	}
